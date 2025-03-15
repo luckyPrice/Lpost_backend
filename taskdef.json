@@ -1,56 +1,120 @@
 {
-    "executionRoleArn": "arn:aws:iam::509399622222:role/ecsTaskExecutionRole",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:509399622222:task-definition/sbcntr-backend-def:3",
     "containerDefinitions": [
-      {
-        "logConfiguration": {
-          "logDriver": "awslogs",
-          "secretOptions": null,
-          "options": {
-            "awslogs-group": "/ecs/sbcntr-backend-def",
-            "awslogs-region": "ap-northeast-2",
-            "awslogs-stream-prefix": "ecs"
-          }
-        },
-        "portMappings": [
-          {
-            "hostPort": 80,
-            "protocol": "tcp",
-            "containerPort": 80
-          }
-        ],
-        "cpu": 256,
-        "readonlyRootFilesystem": true,
-        "environment": [],
-        "secrets": [
-          {
-            "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:host::",
-            "name": "DB_HOST"
-          },
-          {
-            "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:dbname::",
-            "name": "DB_NAME"
-          },
-          {
-            "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:password::",
-            "name": "DB_PASSWORD"
-          },
-          {
-            "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:username::",
-            "name": "DB_USERNAME"
-          }
-        ],
-        "memory": null,
-        "memoryReservation": 512,
-        "image": "<IMAGE1_NAME>",
-        "essential": true,
-        "name": "app"
-      }
+        {
+            "name": "app",
+            "image": "509399622222.dkr.ecr.ap-northeast-2.amazonaws.com/sbcntr-backend:v1",
+            "cpu": 256,
+            "memoryReservation": 512,
+            "portMappings": [
+                {
+                    "name": "app-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "DB_HOST",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:host::"
+                },
+                {
+                    "name": "DB_NAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:dbname::"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:username::"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:509399622222:secret:sbcntr/mysql-85H9YO:password::"
+                }
+            ],
+            "readonlyRootFilesystem": true,
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/",
+                    "mode": "non-blocking",
+                    "awslogs-create-group": "true",
+                    "max-buffer-size": "25m",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
     ],
-    "memory": "1024",
-    "taskRoleArn": null,
     "family": "sbcntr-backend-def",
-    "requiresCompatibilities": ["FARGATE"],
+    "executionRoleArn": "arn:aws:iam::509399622222:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "cpu": "512"
-  }
-  
+    "revision": 3,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.secrets.asm.environment-variables"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2025-03-14T00:48:36.407Z",
+    "registeredBy": "arn:aws:iam::509399622222:user/luckyprice",
+    "enableFaultInjection": false,
+    "tags": []
+}
