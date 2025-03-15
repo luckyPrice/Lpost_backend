@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:509399622222:task-definition/sbcntr-backend-def:3",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:509399622222:task-definition/sbcntr-backend-def:5",
     "containerDefinitions": [
         {
             "name": "app",
-            "image": "509399622222.dkr.ecr.ap-northeast-2.amazonaws.com/sbcntr-backend:v1",
+            "image": "<IMAGE1_NAME>",
             "cpu": 256,
             "memoryReservation": 512,
             "portMappings": [
